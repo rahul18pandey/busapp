@@ -8,13 +8,13 @@ const UberTypeRow = (props) => {
   const {type} = props;
 
   const getImage = () => {
-    if (type.type === 'UberX') {
-      return require('../../assets/images/UberX.jpeg');
+    if (type.type === 'Bus No. 26') {
+      return require('../../assets/images/bus2.png');
     }
-    if (type.type === 'Comfort') {
-      return require('../../assets/images/Comfort.jpeg');
+    if (type.type === 'Bus No. 15') {
+      return require('../../assets/images/bus2.png');
     }
-    return require('../../assets/images/UberXL.jpeg');
+    return require('../../assets/images/bus2.png');
   }
 
   return (
@@ -30,15 +30,15 @@ const UberTypeRow = (props) => {
         <Text style={styles.type}>
           {type.type}{' '}
           <Ionicons name={'person'} size={16} />
-          3
+          15
         </Text>
         <Text style={styles.time}>
-          8:03PM drop off
+          8:47PM drop off
         </Text>
       </View>
       <View style={styles.rightContainer}>
         <Ionicons name={'pricetag'} size={18} color={'#42d742'} />
-        <Text style={styles.price}>est. ${type.price}</Text>
+        <Text style={styles.price}>est. Rs.{type.price}</Text>
       </View>
     </View>
   );

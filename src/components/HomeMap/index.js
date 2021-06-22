@@ -7,19 +7,20 @@ import cars from '../../assets/data/cars';
 const HomeMap = (props) => {
 
   const getImage = (type) => {
-    if (type === 'UberX') {
-      return require('../../assets/images/top-UberX.png');
+    if (type === 'Bus No. 23') {
+      return require('../../assets/images/bus.png');
     }
-    if (type === 'Comfort') {
-      return require('../../assets/images/top-Comfort.png');
+    if (type === 'Bus No. 26') {
+      return require('../../assets/images/bus.png');
     }
-    return require('../../assets/images/top-UberXL.png');
+    return require('../../assets/images/bus.png');
   };
 
   return (
     <MapView
       style={{width: '100%', height: '100%'}}
       provider={PROVIDER_GOOGLE}
+      showsUserLocation={true}
       initialRegion={{
         latitude: 28.450627,
         longitude: -16.263045,
@@ -32,7 +33,14 @@ const HomeMap = (props) => {
           coordinate={{latitude: car.latitude, longitude: car.longitude}}
         >
           <Image
-            style={{width: 70, height: 70, resizeMode: 'contain'}}
+            style={{
+              width: 70,
+              height: 70,
+              resizeMode: 'contain',
+              transform: [{
+                rotate: `${car.heading}deg`
+              }]
+            }}
             source={getImage(car.type)}
           />
         </Marker>
