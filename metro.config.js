@@ -4,8 +4,12 @@
  *
  * @format
  */
+ const exclusionList  = require('metro-config/src/defaults/exclusionList');
 
 module.exports = {
+  resolver: {
+  blacklistRE: exclusionList([/amplify\/#current-cloud-backend\/.*/]),         //add within module export  
+},
   transformer: {
     getTransformOptions: async () => ({
       transform: {

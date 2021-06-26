@@ -1,19 +1,40 @@
-import React from "react";
-import { Image, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Image } from "react-native";
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import {API, graphqlOperation} from 'aws-amplify';
+import { listCars } from '../../graphql/queries';
 
-import cars from '../../assets/data/cars';
+// import cars from '../../assets/data/cars';
 
 const HomeMap = (props) => {
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const response = await API.graphql(
+          graphqlOperation(
+            listCars
+          )
+        )
+
+        setCars(response.data.listCars.items);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    fetchCars();
+  }, [])
 
   const getImage = (type) => {
     if (type === 'Bus No. 23') {
-      return require('../../assets/images/bus.png');
+      return require('../../assets/images/bus3.png');
     }
     if (type === 'Bus No. 26') {
-      return require('../../assets/images/bus.png');
+      return require('../../assets/images/bus3.png');
     }
-    return require('../../assets/images/bus.png');
+    return require('../../assets/images/bus3.png');
   };
 
   return (
@@ -22,8 +43,8 @@ const HomeMap = (props) => {
       provider={PROVIDER_GOOGLE}
       showsUserLocation={true}
       initialRegion={{
-        latitude: 28.450627,
-        longitude: -16.263045,
+        latitude: 26.7783,
+        longitude: 80.9332,
         latitudeDelta: 0.0222,
         longitudeDelta: 0.0121,
       }}>
